@@ -1,6 +1,10 @@
 
--- Default path if not specified by the user, add \\^ for windows
+-- Default path if not specified by the user, add \\$ for windows
 local JL = "C:\\Apps\\JumpList\\"
+
+local function d(...)
+	--ya.dbg(...)
+end
 
 
 local function get_junction_target_fsutil(path_str)
@@ -23,7 +27,7 @@ local function get_junction_target_fsutil(path_str)
     local target = output:match("Print Name:%s*([^\r\n]+)")
     if target then
         -- Remove common prefixes like \??\ or \\?\
-        target = target:gsub("^\\\\%?\\", ""):gsub("^%?%?\\", "")
+        target = target:gsub("^\\\\%?\\", ""):gsub("^%?%?\\", ""):gsub("^\\\\%?\\", ""):gsub("^%?%?\\", ""):gsub("^\\%?%?\\", "")
         return target
     end
 
@@ -31,8 +35,8 @@ local function get_junction_target_fsutil(path_str)
     target = output:match("Substitute Name:%s*([^\r\n]+)")
     if target then
         -- Remove common prefixes like \??\ or \\?\
-        target = target:gsub("^\\\\%?\\", ""):gsub("^%?%?\\", "")
-        return target
+		target = target:gsub("^\\\\%?\\", ""):gsub("^%?%?\\", ""):gsub("^\\\\%?\\", ""):gsub("^%?%?\\", ""):gsub("^\\%?%?\\", "")        
+		return target
     end
 
     return nil
@@ -61,11 +65,11 @@ local function setup(state, options)
 		local cwd = get_current_dir_path()	
 		local cwd_str = tostring(cwd)
 		if cwd_str ~= jl and cwd_str:sub(1, #jl) == jl then
-
-						
+			d("cwd = "..cwd)						
 			-- Attempt to get the target using fsutil
 			local real_target = get_junction_target_fsutil(cwd_str)
-			if real_target and real_target ~= "" then
+			if real_target and real_target ~= "" then				
+				d("    target = "..real_target)						
 				ya.manager_emit("cd", { real_target })
 				return true -- Cancel the original cd action
 			else
