@@ -8,7 +8,7 @@ run = "plugin jumplist"
 desc = "A jumplist which can be used to quickly navigate to various directories."
 
 ## Create jumplist dir:
-Edit main.lua to point to jumplist dir.
+Edit main.lua to point to jumplist dir. (Set to C:\Apps\JumpList)
 Add junctions/symlinks within the directory.
 
 ## Add setup to yazi/init.lua:

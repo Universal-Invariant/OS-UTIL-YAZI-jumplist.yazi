@@ -70,7 +70,7 @@ local function setup(state, options)
 			local real_target = get_junction_target_fsutil(cwd_str)
 			if real_target and real_target ~= "" then				
 				d("    target = "..real_target)						
-				ya.manager_emit("cd", { real_target })
+				ya.emit("cd", { real_target })
 				return true -- Cancel the original cd action
 			else
 			end
@@ -83,6 +83,6 @@ end
 return {
 	setup = setup,	
 	entry = function()
-		ya.manager_emit("cd", { JL })
+		ya.emit("cd", { JL })
 	end,
 }
