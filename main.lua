@@ -1,6 +1,12 @@
 
--- Default path if not specified by the user, add \\$ for windows
+-- Default path if not specified by the user, add \\ for windows
 local JL = "C:\\Apps\\JumpList\\"
+
+-- Name of the virtual ".." entry shown at the top of the jumplist.
+-- It is NOT a real folder: like the drive-list trick (creating empty
+-- placeholder dirs on demand), we create it just-in-time so yazi can
+-- hover/enter it, and remove it again when we leave.
+local VNAME = ".."
 
 local function d(...)
 	--ya.dbg(...)

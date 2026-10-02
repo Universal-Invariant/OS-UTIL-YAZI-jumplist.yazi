@@ -14,6 +14,17 @@ Add junctions/symlinks within the directory.
 ## Add setup to yazi/init.lua:
 require("jumplist"):setup()
 
+## Going back out (virtual ".." entry)
+When you jump into the jumplist, the plugin remembers the directory you
+came from and creates a virtual `..` entry at the top of the list. It is
+not a real folder — it's an empty placeholder directory created just-in-time
+(similar to how yazi's drive-list plugin fakes drive entries on Windows).
+Opening `..` takes you straight back to the previous directory, and the
+placeholder is removed again automatically when you leave the jumplist.
+
+Pressing the jumplist key while already inside the jumplist also acts as
+"leave" and returns you to the previous directory.
+
 <img width="2402" height="1048" alt="Screenshot 2026-10-02 075121" src="https://github.com/user-attachments/assets/b78670e5-87c0-4842-a01e-fce7c0547e41" />
 
 
